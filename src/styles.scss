@@ -1,2 +1,12 @@
-@use "tailwindcss";
+@layer base,
+tailwind,
+primeng;
+
 @plugin "tailwindcss-primeui";
+
+@layer tailwind {
+    @import "tailwindcss";
+}
+
+
+@layer base {}
