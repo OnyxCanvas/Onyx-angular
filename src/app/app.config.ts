@@ -5,6 +5,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { routes } from './app.routes';
+import { OcThemePreset } from './oc-theme';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,13 +14,12 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: OcThemePreset,
         options: {
-          prefix: 'p',
           darkModeSelector: 'dark',
           cssLayer: {
             name: 'primeng',
-            order: 'tailwind, primeng'
+            order: 'tailwind.base, primeng, tailwind.components, tailwind.utilities'
           }
         }
       }
