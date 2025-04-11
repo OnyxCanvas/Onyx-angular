@@ -4,13 +4,19 @@ primeng;
 
 @import "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
 
-
 @layer tailwind {
     @import "tailwindcss";
 }
 
 @plugin "tailwindcss-primeui";
 
-/* while importing, use _ and .scss also to make sure tailwind extension to work properly anf give autocompletion */
+@plugin "daisyui" {
+    themes: emerald --default, dark --prefersdark;
+}
+
+/*
+while importing, use _ and .scss also to make sure tailwind extension
+to work properly and give autocompletion for tailwind classes
+*/
 @import "./styles/_reset.scss";
 @import "./styles/_commons.scss";
