@@ -1,6 +1,6 @@
 import { AsyncPipe, NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { CanvasTool } from '@app/models/tools';
+import { Component, inject, OnInit } from '@angular/core';
+import { CanvasTool, CanvasToolType } from '@app/models/tools';
 import { CanvasService } from '@services/canvas.service';
 
 @Component({
@@ -9,13 +9,13 @@ import { CanvasService } from '@services/canvas.service';
   templateUrl: './toolbar.component.html',
   styles: ``
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
 
   protected canvasService = inject(CanvasService);
 
   protected availableTools: CanvasTool[] = [
     {
-      name: 'Pan',
+      name: CanvasToolType.PAN,
       icon: 'pan_tool',
       description: 'Pan tool',
       action: () => {
@@ -23,7 +23,7 @@ export class ToolbarComponent {
       }
     },
     {
-      name: 'Select',
+      name: CanvasToolType.SELECT,
       icon: 'arrow_selector_tool',
       description: 'Select tool',
       action: () => {
@@ -31,5 +31,9 @@ export class ToolbarComponent {
       }
     },
   ]
+
+  ngOnInit(): void {
+    this.canvasService.selectedTool$.next(CanvasToolType.PAN)
+  }
 
 }

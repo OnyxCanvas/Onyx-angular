@@ -10,10 +10,10 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
 })
 export class CanvasComponent {
 
-  container = viewChild.required<ElementRef<HTMLDivElement>>('container')
+  private container = viewChild.required<ElementRef<HTMLDivElement>>('container')
 
-  initialWidth = signal(0);
-  initialHeight = signal(0);
+  protected initialWidth = signal(0);
+  protected initialHeight = signal(0);
 
   constructor() {
     afterRender(() => {

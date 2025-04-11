@@ -1,6 +1,11 @@
 export interface CanvasTool {
-    name: string;
+    name: CanvasToolType;
     icon: string;
     description: string;
     action: () => void;
+}
+
+export enum CanvasToolType {
+    SELECT = 'select',
+    PAN = 'pan',
 }
