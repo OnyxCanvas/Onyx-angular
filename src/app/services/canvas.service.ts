@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { availableCanvasTools } from '@app/components/configs/tools';
 import { CanvasTool, CanvasToolType } from '@app/models/tools';
 import { BehaviorSubject } from 'rxjs';
 
@@ -8,5 +9,12 @@ import { BehaviorSubject } from 'rxjs';
 export class CanvasService {
 
   public selectedTool$ = new BehaviorSubject<CanvasToolType | null>(null);
+
+  public getCurrentTool(): CanvasTool | null {
+    if (!this.selectedTool$.getValue()) {
+      return null;
+    }
+    return availableCanvasTools.find(tool => tool.name === this.selectedTool$.getValue()) || null;
+  }
 
 }

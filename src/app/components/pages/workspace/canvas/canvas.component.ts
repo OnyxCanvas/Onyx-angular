@@ -1,6 +1,8 @@
-import { afterRender, Component, ElementRef, signal, viewChild } from '@angular/core';
+import { afterRender, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { ToolbarComponent } from "./toolbar/toolbar.component";
+import { CanvasService } from '@services/canvas.service';
+import { CanvasToolType } from '@app/models/tools';
 
 @Component({
   selector: 'oc-canvas',
@@ -10,7 +12,8 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
 })
 export class CanvasComponent {
 
-  private container = viewChild.required<ElementRef<HTMLDivElement>>('container')
+  protected readonly canvasService = inject(CanvasService);
+  private readonly container = viewChild.required<ElementRef<HTMLDivElement>>('container');
 
   protected initialWidth = signal(0);
   protected initialHeight = signal(0);
@@ -22,5 +25,9 @@ export class CanvasComponent {
       this.initialWidth.set(width);
       this.initialHeight.set(height);
     })
+  }
+
+  protected get isDragToolSelected() {
+    return this.canvasService.getCurrentTool()?.name === CanvasToolType.PAN;
   }
 }

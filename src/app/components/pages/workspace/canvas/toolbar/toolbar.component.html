@@ -3,9 +3,9 @@
         <div class="tooltip tooltip-bottom" [attr.data-tip]="tool.description">
             <button class="btn btn-ghost btn-square btn-sm" (click)="canvasService.selectedTool$.next(tool.name)">
                 <span class="material-symbols-outlined text-xl! cursor-pointer" [ngClass]="{
-                            'text-primary': tool.name === (canvasService.selectedTool$ | async),
-                            'text-gray-500': tool.name !== (canvasService.selectedTool$ | async)
-                        }">
+                        'text-primary': tool.name === (canvasService.selectedTool$ | async),
+                        'text-gray-500': tool.name !== (canvasService.selectedTool$ | async)
+                    }">
                     {{ tool.icon }}
                 </span>
             </button>

@@ -1,5 +1,6 @@
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
+import { availableCanvasTools } from '@app/components/configs/tools';
 import { CanvasTool, CanvasToolType } from '@app/models/tools';
 import { CanvasService } from '@services/canvas.service';
 
@@ -11,26 +12,9 @@ import { CanvasService } from '@services/canvas.service';
 })
 export class ToolbarComponent implements OnInit {
 
-  protected canvasService = inject(CanvasService);
+  protected readonly canvasService = inject(CanvasService);
 
-  protected availableTools: CanvasTool[] = [
-    {
-      name: CanvasToolType.PAN,
-      icon: 'pan_tool',
-      description: 'Pan tool',
-      action: () => {
-        console.log('Select tool clicked');
-      }
-    },
-    {
-      name: CanvasToolType.SELECT,
-      icon: 'arrow_selector_tool',
-      description: 'Select tool',
-      action: () => {
-        console.log('Select tool clicked');
-      }
-    },
-  ]
+  protected readonly availableTools: CanvasTool[] = availableCanvasTools;
 
   ngOnInit(): void {
     this.canvasService.selectedTool$.next(CanvasToolType.PAN)
