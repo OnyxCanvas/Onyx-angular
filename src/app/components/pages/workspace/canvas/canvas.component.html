@@ -1,6 +1,7 @@
 <div class="size-full relative overflow-hidden" #container>
-  <canvas class="bg-white absolute" [style.height.px]="initialHeight()" [style.width.px]="initialWidth()" #mainCanvas
-    cdkDrag [cdkDragDisabled]="!isDragEnabled()" [style.cursor]="currentCursor()"></canvas>
+  <canvas class="bg-white absolute" #mainCanvas (cdkDragMoved)="onDrag($event)" (cdkDragStarted)="dragStarted($event)"
+    (cdkDragEnded)="dragEnded($event)" cdkDrag [cdkDragDisabled]="!isDragEnabled()"
+    [style.cursor]="currentCursor()"></canvas>
   <div
     class="absolute top-4 flex gap-2 mx-auto left-0 right-0 w-max rounded-xl shadow-xl border border-gray-200 bg-white px-4 py-2">
     @defer {
