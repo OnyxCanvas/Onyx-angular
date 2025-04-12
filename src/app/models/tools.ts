@@ -1,9 +1,9 @@
 export interface CanvasTool {
-    name: CanvasToolType;
-    icon: string;
-    description: string;
-    action: () => void;
-    cursor?: CanvasCursor;
+    readonly name: CanvasToolType;
+    readonly icon: string;
+    readonly description: string;
+    readonly action: () => void;
+    readonly cursor?: CanvasCursor;
 }
 
 export enum CanvasToolType {
@@ -17,4 +17,6 @@ export enum CanvasCursor {
     CROSSHAIR = 'crosshair',
     POINTER = 'pointer',
     GRAB = 'grab',
+    ZOOM_IN = 'zoom-in',
+    ZOOM_OUT = 'zoom-out',
 }
