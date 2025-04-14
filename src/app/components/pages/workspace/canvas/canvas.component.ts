@@ -1,5 +1,4 @@
 import { afterNextRender, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
-import { CdkDrag, CdkDragEnd, CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { CanvasService } from '@services/canvas.service';
 import { CanvasCursor, CanvasToolType } from '@app/models/tools';
@@ -7,12 +6,10 @@ import { OnyxCanvas } from '@app/components/classes/canvas';
 import { availableCanvasTools } from '@app/components/configs/tools';
 import { UnsubscribeService } from '@services/unsubscribe.service';
 import { takeUntil } from 'rxjs';
-import { Throttle } from '@app/components/decorators/throttle';
-import { Debounce } from '@app/components/decorators/debounce';
 
 @Component({
   selector: 'oc-canvas',
-  imports: [CdkDrag, ToolbarComponent],
+  imports: [ToolbarComponent],
   templateUrl: './canvas.component.html',
   styles: ``,
   providers: [UnsubscribeService]
@@ -22,7 +19,7 @@ export class CanvasComponent {
   private canvasRef: OnyxCanvas | null = null;
   private readonly unsubscribe$ = inject(UnsubscribeService);
   protected readonly canvasService = inject(CanvasService);
-  private readonly mainCanvas = viewChild.required<ElementRef<HTMLCanvasElement>>('mainCanvas');
+  private readonly mainCanvas = viewChild.required<ElementRef<HTMLDivElement>>('mainCanvas');
   private readonly container = viewChild.required<ElementRef<HTMLDivElement>>('container');
   protected readonly isDragEnabled = signal(false);
   protected readonly currentCursor = signal<CanvasCursor>(CanvasCursor.DEFAULT);
@@ -31,8 +28,7 @@ export class CanvasComponent {
     afterNextRender(() => {
       const container = this.container().nativeElement;
       const { width, height } = container.getBoundingClientRect();
-      this.canvasRef = new OnyxCanvas(this.mainCanvas().nativeElement);
-      this.canvasRef.setDimensions(width, height);
+      this.canvasRef = new OnyxCanvas(this.mainCanvas().nativeElement, width, height);
     })
     this.canvasService.selectedTool$.pipe(takeUntil(this.unsubscribe$)).subscribe((tool) => {
       this.isDragEnabled.set(tool === CanvasToolType.PAN);
