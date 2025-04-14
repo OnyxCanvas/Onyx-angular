@@ -53,7 +53,8 @@ export class OnyxCanvas {
     const { width, height } = this.getDimensions();
     const parentWidth = parent.clientWidth;
     const parentHeight = parent.clientHeight;
-    console.log('Parent dimensions:', parentWidth, parentHeight);
+    // console.log('Parent dimensions:', parentWidth, parentHeight);
+    console.log(this._canvas.getBoundingClientRect());
   }
 
   private redraw() {
