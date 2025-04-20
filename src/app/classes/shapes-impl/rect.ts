@@ -12,7 +12,7 @@ export class Rectangle extends OCShape implements OnyxRect {
     if (shape.type !== undefined && shape.type !== OnyxShapeType.RECTANGLE) {
       throw new Error('Invalid shape type');
     }
-    super(new Konva.Rect({
+    const rect = new Konva.Rect({
       x: shape.x,
       y: shape.y,
       width: shape.width,
@@ -21,7 +21,8 @@ export class Rectangle extends OCShape implements OnyxRect {
       stroke: shape.stroke,
       strokeWidth: shape.strokeWidth,
       opacity: shape.opacity,
-    }), OnyxShapeType.RECTANGLE);
+    });
+    super(rect, OnyxShapeType.RECTANGLE);
     this._width = shape.width;
     this._height = shape.height;
   }
