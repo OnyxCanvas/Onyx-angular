@@ -39,6 +39,9 @@
       "@app/*": [
         "./src/app/*"
       ],
+      "@classes/*": [
+        "./src/app/classes/*"
+      ],
     },
   },
   "angularCompilerOptions": {
