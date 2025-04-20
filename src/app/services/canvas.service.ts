@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { availableCanvasTools } from '@app/components/configs/tools';
+import { availableCanvasTools } from '@app/configs/tools';
 import { CanvasTool, CanvasToolType } from '@app/models/tools';
 import { BehaviorSubject } from 'rxjs';
 

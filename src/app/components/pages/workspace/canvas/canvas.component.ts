@@ -2,8 +2,8 @@ import { afterNextRender, Component, ElementRef, inject, signal, viewChild } fro
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { CanvasService } from '@services/canvas.service';
 import { CanvasCursor, CanvasToolType } from '@app/models/tools';
-import { OnyxCanvas } from '@app/components/classes/canvas';
-import { availableCanvasTools } from '@app/components/configs/tools';
+import { OnyxCanvas } from '@app/classes/canvas';
+import { availableCanvasTools } from '@app/configs/tools';
 import { UnsubscribeService } from '@services/unsubscribe.service';
 import { takeUntil } from 'rxjs';
 
