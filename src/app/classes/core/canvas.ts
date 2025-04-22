@@ -1,7 +1,7 @@
 import Konva from 'konva';
 import { Shapes } from './shapes';
-import { Rectangle } from './shapes-impl/rect';
-import { OCShape } from '@app/classes/abstract/shape';
+import { Rectangle } from '../shapes/rect';
+import { OCShape } from '@app/classes/abstracts/shape';
 import { CANVAS_EXPORT_OFFSET } from '@app/constants/canvas-values';
 import { ToastProxy } from './toast-proxy';
 

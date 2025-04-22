@@ -1,4 +1,4 @@
-import { OCShape } from '@app/classes/abstract/shape';
+import { OCShape } from '@app/classes/abstracts/shape';
 import { OnyxRect, OnyxShape, OnyxShapeType } from '@app/models/shape';
 import Konva from 'konva';
 

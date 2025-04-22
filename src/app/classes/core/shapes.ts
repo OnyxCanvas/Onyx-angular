@@ -1,4 +1,4 @@
-import { OCShape } from '@app/classes/abstract/shape';
+import { OCShape } from '@app/classes/abstracts/shape';
 
 export class Shapes {
 
