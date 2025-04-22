@@ -30,17 +30,6 @@ export class CanvasComponent {
       const container = this.container().nativeElement;
       const { width, height } = container.getBoundingClientRect();
       this.canvasRef = new OnyxCanvas(this.mainCanvas().nativeElement, width, height);
-
-      this.canvasRef.createShape(new Rectangle({
-        x: 10,
-        y: 10,
-        width: 100,
-        height: 100,
-        fill: 'red',
-        stroke: 'black',
-        strokeWidth: 5,
-        id: 'rect1',
-      }))
     })
     this.canvasService.selectedTool$.pipe(takeUntil(this.unsubscribe$)).subscribe((tool) => {
       this.isDragEnabled.set(tool === CanvasToolType.PAN);

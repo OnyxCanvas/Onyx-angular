@@ -44,4 +44,11 @@ export class Rectangle extends OCShape implements OnyxRect {
     this._shape?.height(value);
   }
 
+  public get calculatedWidth(): number {
+    return this._shape?.width() ?? 0;
+  }
+  public get calculatedHeight(): number {
+    return this._shape?.height() ?? 0;
+  }
+
 }

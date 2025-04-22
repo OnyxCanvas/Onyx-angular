@@ -14,6 +14,9 @@ export abstract class OCShape implements OnyxBaseShape {
   private _rotation?: number | undefined;
   private readonly _shapeType: OnyxShapeType;
 
+  public abstract get calculatedWidth(): number;
+  public abstract get calculatedHeight(): number;
+
   constructor(shape: Konva.Shape, type: OnyxShapeType) {
     this._shape = shape;
     this._id = '';

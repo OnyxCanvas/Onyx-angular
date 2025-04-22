@@ -2,6 +2,7 @@ import Konva from 'konva';
 import { Shapes } from './shapes';
 import { Rectangle } from './shapes-impl/rect';
 import { OCShape } from '@app/classes/abstract/shape';
+import { CANVAS_EXPORT_OFFSET } from '@app/constants/canvas-values';
 
 export class OnyxCanvas {
 
@@ -92,5 +93,38 @@ export class OnyxCanvas {
     this._backgroundLayer.destroy();
     this._mainLayer.destroy();
     this._stage.destroy();
+  }
+
+  public export() {
+    const leftMostX = this.shapes.getAllShapes().reduce((acc, layer) => {
+      return Math.min(acc, layer.x!);
+    }, Infinity);
+    const rightMostX = this.shapes.getAllShapes().reduce((acc, layer) => {
+      return Math.max(acc, layer.x! + layer.calculatedWidth);
+    }, -Infinity);
+    const topMostY = this.shapes.getAllShapes().reduce((acc, layer) => {
+      return Math.min(acc, layer.y!);
+    }, Infinity);
+    const bottomMostY = this.shapes.getAllShapes().reduce((acc, layer) => {
+      return Math.max(acc, layer.y! + layer.calculatedHeight);
+    }, -Infinity);
+    const width = rightMostX - leftMostX;
+    const height = bottomMostY - topMostY;
+    const x = leftMostX;
+    const y = topMostY;
+    const dataURL = this._stage.toDataURL({
+      pixelRatio: (width * height) > 1000000 ? 1 : 2, // Set pixel ratio to 1 for large images
+      x: x - CANVAS_EXPORT_OFFSET,
+      y: y - CANVAS_EXPORT_OFFSET,
+      width: width + (CANVAS_EXPORT_OFFSET * 2), // Multiply by 2 to account for the offset of left and top
+      height: height + (CANVAS_EXPORT_OFFSET * 2), // Multiply by 2 to account for the offset of left and top
+    });
+    // create link to download
+    const link = document.createElement('a');
+    link.download = 'stage.png';
+    link.href = dataURL;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 }
