@@ -1,3 +1,5 @@
+@use '@ngneat/hot-toast/src/styles/styles.scss';
+
 @layer base,
 tailwind,
 primeng;
@@ -7,6 +9,7 @@ primeng;
 @layer tailwind {
   @import "tailwindcss";
 }
+
 
 @plugin "tailwindcss-primeui";
 

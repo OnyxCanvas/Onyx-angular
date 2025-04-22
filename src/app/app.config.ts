@@ -1,17 +1,23 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, ENVIRONMENT_INITIALIZER, inject, provideEnvironmentInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
 import { routes } from './app.routes';
 import { OcThemePreset } from './oc-theme';
+import { HotToastService, provideHotToastConfig } from '@ngneat/hot-toast';
+import { ToastProxy } from './classes/toast-proxy';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
+    provideHotToastConfig({
+      position: 'bottom-center',
+      theme: 'toast'
+    }),
     providePrimeNG({
       theme: {
         preset: OcThemePreset,
@@ -23,6 +29,7 @@ export const appConfig: ApplicationConfig = {
           }
         }
       }
-    })
+    }),
+    provideEnvironmentInitializer(() => ToastProxy.init(inject(HotToastService)))
   ]
 };

@@ -3,6 +3,7 @@ import { Shapes } from './shapes';
 import { Rectangle } from './shapes-impl/rect';
 import { OCShape } from '@app/classes/abstract/shape';
 import { CANVAS_EXPORT_OFFSET } from '@app/constants/canvas-values';
+import { ToastProxy } from './toast-proxy';
 
 export class OnyxCanvas {
 
@@ -101,6 +102,10 @@ export class OnyxCanvas {
   }
 
   public export() {
+    if (this.shapes.getAllShapes().length === 0) {
+      ToastProxy.instance.error('Add at least one shape to export');
+      return;
+    }
     const leftMostX = this.shapes.getAllShapes().reduce((acc, layer) => {
       return Math.min(acc, layer.x!);
     }, Infinity);
