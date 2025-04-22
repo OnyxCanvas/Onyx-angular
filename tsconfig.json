@@ -36,11 +36,11 @@
       "@pipes/*": [
         "./src/app/pipes/*"
       ],
-      "@app/*": [
-        "./src/app/*"
-      ],
       "@classes/*": [
         "./src/app/classes/*"
+      ],
+      "@app/*": [
+        "./src/app/*"
       ],
     },
   },

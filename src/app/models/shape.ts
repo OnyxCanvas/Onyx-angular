@@ -7,6 +7,7 @@ export interface OnyxBaseShape {
   stroke?: string;
   opacity?: number;
   rotation?: number;
+  type?: OnyxShapeType;
 }
 
 export enum OnyxShapeType {

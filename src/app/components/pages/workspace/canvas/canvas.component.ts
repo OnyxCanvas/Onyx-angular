@@ -6,7 +6,6 @@ import { OnyxCanvas } from '@app/classes/core/canvas';
 import { availableCanvasTools } from '@app/configs/tools';
 import { UnsubscribeService } from '@services/unsubscribe.service';
 import { takeUntil } from 'rxjs';
-import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'oc-canvas',
@@ -16,8 +15,6 @@ import { HotToastService } from '@ngneat/hot-toast';
   providers: [UnsubscribeService]
 })
 export class CanvasComponent {
-
-  private toaster = inject(HotToastService);
 
   private canvasRef: OnyxCanvas | null = null;
   private readonly unsubscribe$ = inject(UnsubscribeService);

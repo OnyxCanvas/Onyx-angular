@@ -1,9 +1,9 @@
 import Konva from 'konva';
 import { Shapes } from './shapes';
-import { Rectangle } from '../shapes/rect';
 import { OCShape } from '@app/classes/abstracts/shape';
 import { CANVAS_EXPORT_OFFSET } from '@app/constants/canvas-values';
 import { ToastProxy } from './toast-proxy';
+import { Rectangle } from '@classes/shapes/rect';
 
 export class OnyxCanvas {
 
