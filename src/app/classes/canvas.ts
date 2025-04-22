@@ -26,7 +26,7 @@ export class OnyxCanvas {
       container: this._elementRef,
       width,
       height,
-      draggable: true,
+      draggable: false,
     })
     // Add initial layers
     this._backgroundLayer = new Konva.Layer();
@@ -57,6 +57,10 @@ export class OnyxCanvas {
       this.shapes.translateAllShapes(currentTranslation.x, currentTranslation.y);
     });
 
+  }
+
+  public togglePanningMode(enable: boolean) {
+    this._stage.draggable(enable);
   }
 
   public createShape(shape: OCShape) {
@@ -90,6 +94,7 @@ export class OnyxCanvas {
   }
 
   public cleanup() {
+    this.shapes.clearShapes();
     this._backgroundLayer.destroy();
     this._mainLayer.destroy();
     this._stage.destroy();

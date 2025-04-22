@@ -18,6 +18,7 @@ export abstract class OCShape implements OnyxBaseShape {
   public abstract get calculatedHeight(): number;
 
   constructor(shape: Konva.Shape, type: OnyxShapeType) {
+    this.addDefaultProperties(shape);
     this._shape = shape;
     this._id = '';
     this._x = shape.x();
@@ -28,6 +29,10 @@ export abstract class OCShape implements OnyxBaseShape {
     this._opacity = shape.opacity();
     this._rotation = shape.rotation();
     this._shapeType = type;
+  }
+
+  private addDefaultProperties(shape: Konva.Shape): void {
+    shape.draggable(true);
   }
 
   get type(): OnyxShapeType {

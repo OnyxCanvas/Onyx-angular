@@ -22,7 +22,6 @@ export class CanvasComponent {
   protected readonly canvasService = inject(CanvasService);
   private readonly mainCanvas = viewChild.required<ElementRef<HTMLDivElement>>('mainCanvas');
   private readonly container = viewChild.required<ElementRef<HTMLDivElement>>('container');
-  protected readonly isDragEnabled = signal(false);
   protected readonly currentCursor = signal<CanvasCursor>(CanvasCursor.DEFAULT);
 
   constructor() {
@@ -32,7 +31,7 @@ export class CanvasComponent {
       this.canvasRef = new OnyxCanvas(this.mainCanvas().nativeElement, width, height);
     })
     this.canvasService.selectedTool$.pipe(takeUntil(this.unsubscribe$)).subscribe((tool) => {
-      this.isDragEnabled.set(tool === CanvasToolType.PAN);
+      this.canvasRef?.togglePanningMode(tool === CanvasToolType.PAN);
       const selectedTool = availableCanvasTools.find(t => t.name === tool);
       if (selectedTool) {
         this.currentCursor.set(selectedTool.cursor || CanvasCursor.DEFAULT);
