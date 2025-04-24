@@ -1,7 +1,7 @@
 export interface OnyxBaseShape {
   id: string;
-  x?: number;
-  y?: number;
+  x: number;
+  y: number;
   strokeWidth?: number;
   fill?: string;
   stroke?: string;

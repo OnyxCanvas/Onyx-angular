@@ -1,18 +1,20 @@
 import { OCShape } from '@app/classes/abstracts/shape';
 import { OnyxLine, OnyxShapeType } from '@app/models/shape';
 import Konva from 'konva';
+import { Vector2d } from 'konva/lib/types';
 
-export class Line extends OCShape implements OnyxLine {
+export class Line extends OCShape<Konva.Line> implements OnyxLine {
 
   private _points: number[];
   private readonly _type = OnyxShapeType.LINE;
-  protected override _shape: Konva.Line | null = null;
 
   constructor(shape: Omit<OnyxLine, 'type'> & { type?: OnyxShapeType.LINE }) {
     if (shape.type !== undefined && shape.type !== OnyxShapeType.LINE) {
       throw new Error('Invalid shape type');
     }
     const line = new Konva.Line({
+      x: shape.x,
+      y: shape.y,
       points: shape.points,
       stroke: shape.stroke,
       strokeWidth: shape.strokeWidth,
@@ -25,7 +27,15 @@ export class Line extends OCShape implements OnyxLine {
     this._points = shape.points;
   }
 
+  public override onDrawEvent(vector: Konva.Vector2d): void {
+    if (this._shape) {
+      this._shape.points([...this._shape.points(), vector.x, vector.y]);
+    }
+  }
+
   public override get calculatedWidth(): number {
+    if (this.x !== undefined) return this.x;
+    if (this.y !== undefined) return this.y;
     const bounds = this._shape?.getClientRect();
     return bounds ? bounds.width : 0;
   }
@@ -48,7 +58,9 @@ export class Line extends OCShape implements OnyxLine {
     this._shape?.points(value);
   }
 
-  public get calculatedPoints(): number[] {
-    return this._shape?.points() ?? [];
+  public addPoint(point: Vector2d): void {
+    this._points.push(point.x, point.y);
+    this._shape?.points(this._points);
   }
+
 }

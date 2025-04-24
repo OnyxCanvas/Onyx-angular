@@ -1,12 +1,11 @@
-import { ApplicationConfig, ENVIRONMENT_INITIALIZER, inject, provideEnvironmentInitializer, provideZoneChangeDetection } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { ApplicationConfig, inject, provideEnvironmentInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { OcThemePreset } from './oc-theme';
 import { HotToastService, provideHotToastConfig } from '@ngneat/hot-toast';
-import { ToastProxy } from './classes/core/toast-proxy';
+import { ToastProxy } from '@classes/core/toast-proxy';
 
 
 export const appConfig: ApplicationConfig = {

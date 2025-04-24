@@ -1,8 +1,8 @@
 import { OCShape } from '@app/classes/abstracts/shape';
-import { OnyxRect, OnyxShape, OnyxShapeType } from '@app/models/shape';
+import { OnyxRect, OnyxShapeType } from '@app/models/shape';
 import Konva from 'konva';
 
-export class Rectangle extends OCShape implements OnyxRect {
+export class Rectangle extends OCShape<Konva.Rect> implements OnyxRect {
 
   private _height: number;
   private _width: number;
@@ -49,6 +49,13 @@ export class Rectangle extends OCShape implements OnyxRect {
   }
   public get calculatedHeight(): number {
     return this._shape?.height() ?? 0;
+  }
+
+  public override onDrawEvent(vector: Konva.Vector2d): void {
+    if (this._shape) {
+      this.width = vector.x - this._shape.x();
+      this.height = vector.y - this._shape.y();
+    }
   }
 
 }

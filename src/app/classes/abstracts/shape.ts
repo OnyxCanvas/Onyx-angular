@@ -1,12 +1,14 @@
-import { OnyxBaseShape, OnyxShapeType, OnyxShape } from '@app/models/shape';
+import { OnyxBaseShape, OnyxShapeType } from '@app/models/shape';
 import Konva from "konva";
+import { Vector2d } from 'konva/lib/types';
+import { v4 as uuid } from 'uuid';
 
-export abstract class OCShape implements OnyxBaseShape {
+export abstract class OCShape<ShapeType extends Konva.Shape = Konva.Shape> implements OnyxBaseShape {
 
-  protected _shape: Konva.Shape | null = null;
+  protected _shape: ShapeType | null = null;
   private _id: string;
-  private _x?: number | undefined;
-  private _y?: number | undefined;
+  private _x: number;
+  private _y: number;
   private _strokeWidth?: number | undefined;
   private _fill?: string | undefined;
   private _stroke?: string | undefined;
@@ -17,10 +19,12 @@ export abstract class OCShape implements OnyxBaseShape {
   public abstract get calculatedWidth(): number;
   public abstract get calculatedHeight(): number;
 
-  constructor(shape: Konva.Shape, type: OnyxShapeType) {
+  public abstract onDrawEvent(vector: Vector2d): void;
+
+  constructor(shape: ShapeType, type: OnyxShapeType) {
     this.addDefaultProperties(shape);
     this._shape = shape;
-    this._id = '';
+    this._id = shape.id() ?? uuid();
     this._x = shape.x();
     this._y = shape.y();
     this._strokeWidth = shape.strokeWidth();
@@ -31,7 +35,7 @@ export abstract class OCShape implements OnyxBaseShape {
     this._shapeType = type;
   }
 
-  private addDefaultProperties(shape: Konva.Shape): void {
+  private addDefaultProperties(shape: ShapeType): void {
     shape.draggable(true);
   }
 
@@ -39,7 +43,7 @@ export abstract class OCShape implements OnyxBaseShape {
     return this._shapeType;
   }
 
-  public get shape(): Konva.Shape | null {
+  public get shape(): ShapeType | null {
     return this._shape;
   }
 
@@ -52,20 +56,20 @@ export abstract class OCShape implements OnyxBaseShape {
     this._shape?.id(value);
   }
 
-  get x(): number | undefined {
+  get x(): number {
     return this._x;
   }
 
-  set x(value: number | undefined) {
+  set x(value: number) {
     this._x = value;
     this._shape?.x(value);
   }
 
-  get y(): number | undefined {
+  get y(): number {
     return this._y;
   }
 
-  set y(value: number | undefined) {
+  set y(value: number) {
     this._y = value;
     this._shape?.y(value);
   }
