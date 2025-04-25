@@ -1,8 +1,11 @@
 <div class="w-full flex gap-2">
+  @let selectedTool = canvasService.selectedTool$ | async;
   @for (tool of availableTools; track $index) {
+    @if (tool.separator) {
+      <div class="border-l opacity-20"></div>
+    }
     <div class="tooltip tooltip-bottom" [attr.data-tip]="tool.description">
       <button class="btn btn-ghost btn-square btn-sm" (click)="canvasService.selectedTool$.next(tool.name)">
-        @let selectedTool = canvasService.selectedTool$ | async;
         <span class="material-symbols-outlined text-xl! cursor-pointer" [ngClass]="{
             'text-primary': tool.name === selectedTool,
             'text-gray-500': tool.name !== selectedTool

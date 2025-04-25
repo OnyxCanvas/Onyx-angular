@@ -1,4 +1,8 @@
-import { OnyxShapeType } from "./shape";
+
+export enum CanvasToolCategory {
+  SHAPES = 'shapes',
+  TOOLS = 'tools',
+}
 
 export interface CanvasTool {
   readonly name: CanvasToolType;
@@ -8,11 +12,11 @@ export interface CanvasTool {
   readonly action: () => void;
   readonly cursor?: CanvasCursor;
   readonly disabled?: boolean;
+  readonly category: CanvasToolCategory;
+  /* if true, a separator will be shown before this tool */
+  readonly separator?: boolean;
 }
 
-export interface CanvasShapeTool extends CanvasTool {
-  readonly shapeType: OnyxShapeType;
-}
 
 export enum CanvasToolType {
   SELECT = 'select',

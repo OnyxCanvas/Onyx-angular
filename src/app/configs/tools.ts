@@ -1,5 +1,4 @@
-import { OnyxShapeType } from '@app/models/shape';
-import { CanvasCursor, CanvasShapeTool, CanvasTool, CanvasToolType } from '@app/models/tools';
+import { CanvasCursor, CanvasTool, CanvasToolCategory, CanvasToolType } from '@app/models/tools';
 
 export const availableCanvasTools: CanvasTool[] = [
   {
@@ -7,6 +6,7 @@ export const availableCanvasTools: CanvasTool[] = [
     icon: 'pan_tool',
     description: 'Pan tool',
     cursor: CanvasCursor.GRAB,
+    category: CanvasToolCategory.TOOLS,
     action: () => {
       console.log('Pan tool clicked');
     }
@@ -16,27 +16,26 @@ export const availableCanvasTools: CanvasTool[] = [
     icon: 'arrow_selector_tool',
     description: 'Select tool',
     cursor: CanvasCursor.DEFAULT,
+    category: CanvasToolCategory.TOOLS,
     action: () => {
       console.log('Select tool clicked');
     },
-  }
-]
-
-export const availableCanvasShapes: CanvasShapeTool[] = [
+  },
   {
+    separator: true,
     name: CanvasToolType.RECTANGLE,
     icon: 'rectangle',
     description: 'Rectangle tool',
-    shapeType: OnyxShapeType.RECTANGLE,
+    category: CanvasToolCategory.SHAPES,
     action: () => {
       console.log('Rectangle tool clicked');
     },
   },
   {
     name: CanvasToolType.LINE,
-    icon: 'line_tool',
+    icon: 'pen_size_1',
     description: 'Line tool',
-    shapeType: OnyxShapeType.LINE,
+    category: CanvasToolCategory.SHAPES,
     action: () => {
       console.log('Line tool clicked');
     },

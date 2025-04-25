@@ -16,6 +16,7 @@ export class ToolbarComponent implements OnInit {
 
   protected readonly availableTools: CanvasTool[] = availableCanvasTools;
 
+
   ngOnInit(): void {
     this.canvasService.selectedTool$.next(CanvasToolType.PAN)
   }
