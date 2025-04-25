@@ -1,11 +1,10 @@
 import { OCShape } from '@app/classes/abstracts/shape';
 import { OnyxRect, OnyxShapeType } from '@app/models/shape';
 import Konva from 'konva';
+import { v4 as uuid } from 'uuid';
 
 export class Rectangle extends OCShape<Konva.Rect> implements OnyxRect {
 
-  private _height: number;
-  private _width: number;
   private readonly _type = OnyxShapeType.RECTANGLE;
 
   constructor(shape: Omit<OnyxRect, 'type'> & { type?: OnyxShapeType.RECTANGLE }) {
@@ -23,24 +22,20 @@ export class Rectangle extends OCShape<Konva.Rect> implements OnyxRect {
       opacity: shape.opacity,
     });
     super(rect, OnyxShapeType.RECTANGLE);
-    this._width = shape.width;
-    this._height = shape.height;
   }
   public override get type(): OnyxShapeType.RECTANGLE {
     return this._type;
   }
   public get width(): number {
-    return this._width;
+    return this._shape?.width()!
   }
   public set width(value: number) {
-    this._width = value;
     this._shape?.width(value);
   }
   public get height(): number {
-    return this._height;
+    return this._shape?.height()!
   }
   public set height(value: number) {
-    this._height = value;
     this._shape?.height(value);
   }
 
@@ -56,6 +51,21 @@ export class Rectangle extends OCShape<Konva.Rect> implements OnyxRect {
       this.width = vector.x - this._shape.x();
       this.height = vector.y - this._shape.y();
     }
+  }
+
+  public static getEmptyShape(options: Partial<OnyxRect> = {}): Rectangle {
+    return new Rectangle({
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+      fill: 'transparent',
+      stroke: 'black',
+      strokeWidth: 1,
+      opacity: 1,
+      id: uuid(),
+      ...options
+    });
   }
 
 }

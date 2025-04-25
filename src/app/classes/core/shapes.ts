@@ -41,4 +41,10 @@ export class Shapes {
       shape.y = shape.y! + y;
     });
   }
+
+  public toggleAllShapeDraggable(enable: boolean): void {
+    this._allShapes.forEach((shape) => {
+      shape.shape?.draggable(enable);
+    });
+  }
 }

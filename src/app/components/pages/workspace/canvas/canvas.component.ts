@@ -1,4 +1,4 @@
-import { afterNextRender, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { afterNextRender, Component, ElementRef, inject, OnDestroy, signal, viewChild } from '@angular/core';
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { CanvasService } from '@services/canvas.service';
 import { CanvasCursor, CanvasToolType } from '@app/models/tools';
@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs';
   styles: ``,
   providers: [UnsubscribeService]
 })
-export class CanvasComponent {
+export class CanvasComponent implements OnDestroy {
 
   private canvasRef: OnyxCanvas | null = null;
   private readonly unsubscribe$ = inject(UnsubscribeService);
@@ -30,12 +30,18 @@ export class CanvasComponent {
       this.canvasRef = new OnyxCanvas(this.mainCanvas().nativeElement, width, height);
     })
     this.canvasService.selectedTool$.pipe(takeUntil(this.unsubscribe$)).subscribe((tool) => {
-      this.canvasRef?.togglePanningMode(tool === CanvasToolType.PAN);
+      if (!tool) return;
+      this.canvasRef?.toolChange(tool);
       const selectedTool = availableCanvasTools.find(t => t.name === tool);
       if (selectedTool) {
         this.currentCursor.set(selectedTool.cursor || CanvasCursor.DEFAULT);
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.canvasRef?.cleanup();
+    this.canvasRef = null;
   }
 
 }

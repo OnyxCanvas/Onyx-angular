@@ -1,3 +1,4 @@
+import { OnyxShapeType } from '@app/models/shape';
 import { CanvasCursor, CanvasTool, CanvasToolCategory, CanvasToolType } from '@app/models/tools';
 
 export const availableCanvasTools: CanvasTool[] = [
@@ -21,11 +22,13 @@ export const availableCanvasTools: CanvasTool[] = [
       console.log('Select tool clicked');
     },
   },
+  // Shapes Below
   {
     separator: true,
     name: CanvasToolType.RECTANGLE,
     icon: 'rectangle',
     description: 'Rectangle tool',
+    shape: OnyxShapeType.RECTANGLE,
     category: CanvasToolCategory.SHAPES,
     action: () => {
       console.log('Rectangle tool clicked');
@@ -35,6 +38,7 @@ export const availableCanvasTools: CanvasTool[] = [
     name: CanvasToolType.LINE,
     icon: 'pen_size_1',
     description: 'Line tool',
+    shape: OnyxShapeType.LINE,
     category: CanvasToolCategory.SHAPES,
     action: () => {
       console.log('Line tool clicked');

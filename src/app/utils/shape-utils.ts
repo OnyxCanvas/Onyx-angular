@@ -1,4 +1,5 @@
-import { OnyxShapeType } from '@app/models/shape';
+import { DEFAULT_STROKE_WIDTH } from '@app/constants/canvas-values';
+import { OnyxShapeType, OnyxBaseShape } from '@app/models/shape';
 import { OCShape } from '@classes/abstracts/shape';
 import { Line, Rectangle } from '@classes/shapes';
 import Konva from 'konva';
@@ -10,11 +11,11 @@ export function getEmptyShape(shapeType: OnyxShapeType, startVector: Konva.Vecto
       return new Line({
         points: [],
         stroke: '#000000',
-        strokeWidth: 1,
+        strokeWidth: DEFAULT_STROKE_WIDTH,
         opacity: 1,
         id: uuid(),
         x: startVector.x,
-        y: startVector.y
+        y: startVector.y,
       })
     case OnyxShapeType.RECTANGLE:
       return new Rectangle({
@@ -22,9 +23,9 @@ export function getEmptyShape(shapeType: OnyxShapeType, startVector: Konva.Vecto
         y: startVector.y,
         width: 0,
         height: 0,
-        fill: '#000000',
+        fill: 'transparent',
         stroke: '#000000',
-        strokeWidth: 1,
+        strokeWidth: DEFAULT_STROKE_WIDTH,
         opacity: 1,
         id: uuid()
       });

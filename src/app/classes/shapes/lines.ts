@@ -20,7 +20,7 @@ export class Line extends OCShape<Konva.Line> implements OnyxLine {
       strokeWidth: shape.strokeWidth,
       opacity: shape.opacity,
       lineCap: 'round',
-      lineJoin: 'round'
+      lineJoin: 'round',
     });
     super(line, OnyxShapeType.LINE);
     this._shape = line;
@@ -29,7 +29,7 @@ export class Line extends OCShape<Konva.Line> implements OnyxLine {
 
   public override onDrawEvent(vector: Konva.Vector2d): void {
     if (this._shape) {
-      this._shape.points([...this._shape.points(), vector.x, vector.y]);
+      this.addPoint(vector);
     }
   }
 
@@ -59,7 +59,9 @@ export class Line extends OCShape<Konva.Line> implements OnyxLine {
   }
 
   public addPoint(point: Vector2d): void {
-    this._points.push(point.x, point.y);
+    const modifiedX = point.x - this.x;
+    const modifiedY = point.y - this.y;
+    this._points.push(modifiedX, modifiedY);
     this._shape?.points(this._points);
   }
 

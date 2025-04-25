@@ -1,10 +1,12 @@
+import { OnyxShapeType } from '@app/models/shape';
+import { Prettify } from './prettify';
 
 export enum CanvasToolCategory {
   SHAPES = 'shapes',
   TOOLS = 'tools',
 }
 
-export interface CanvasTool {
+interface CanvasToolBase {
   readonly name: CanvasToolType;
   readonly icon: string;
   /** The icon description which is shown in tooltip */
@@ -12,10 +14,16 @@ export interface CanvasTool {
   readonly action: () => void;
   readonly cursor?: CanvasCursor;
   readonly disabled?: boolean;
-  readonly category: CanvasToolCategory;
   /* if true, a separator will be shown before this tool */
   readonly separator?: boolean;
 }
+
+export type CanvasTool = Prettify<CanvasToolBase & ({
+  readonly category: CanvasToolCategory.SHAPES;
+  readonly shape: OnyxShapeType
+} | {
+  readonly category: CanvasToolCategory.TOOLS;
+})>
 
 
 export enum CanvasToolType {
