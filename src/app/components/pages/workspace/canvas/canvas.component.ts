@@ -6,6 +6,7 @@ import { OnyxCanvas } from '@app/classes/core/canvas';
 import { availableCanvasTools } from '@app/configs/tools';
 import { UnsubscribeService } from '@services/unsubscribe.service';
 import { takeUntil } from 'rxjs';
+import { Rectangle } from '@classes/shapes';
 
 @Component({
   selector: 'oc-canvas',

@@ -30,7 +30,7 @@ export enum CanvasToolType {
   SELECT = 'select',
   PAN = 'pan',
   ZOOM = 'zoom',
-  BRUSH = 'brush',
+  Drawing = 'drawing',
   RECTANGLE = 'rectangle',
   LINE = 'line',
 }

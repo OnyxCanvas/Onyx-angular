@@ -8,21 +8,18 @@ export abstract class OCShape<ShapeType extends Konva.Shape = Konva.Shape> imple
   protected _shape: ShapeType | null = null;
   private readonly _shapeType: OnyxShapeType;
 
-  public abstract get calculatedWidth(): number;
-  public abstract get calculatedHeight(): number;
-
   public abstract onDrawEvent(vector: Vector2d): void;
 
   constructor(shape: ShapeType, type: OnyxShapeType) {
     this.addDefaultProperties(shape);
     this._shape = shape;
     this._shapeType = type;
-    if (!shape.id()) {
-      this._shape.id(uuid());
-    }
   }
 
   private addDefaultProperties(shape: ShapeType): void {
+    if (!shape.id()) {
+      shape!.id(uuid());
+    }
   }
 
   get type(): OnyxShapeType {
@@ -102,4 +99,15 @@ export abstract class OCShape<ShapeType extends Konva.Shape = Konva.Shape> imple
       this._shape.destroy();
     }
   }
+
+  public get calculatedWidth(): number {
+    const bounds = this._shape?.getClientRect();
+    return bounds ? bounds.width : 0;
+  }
+
+  public get calculatedHeight(): number {
+    const bounds = this._shape?.getClientRect();
+    return bounds ? bounds.height : 0;
+  }
+
 }

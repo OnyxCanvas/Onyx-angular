@@ -39,13 +39,6 @@ export class Rectangle extends OCShape<Konva.Rect> implements OnyxRect {
     this._shape?.height(value);
   }
 
-  public get calculatedWidth(): number {
-    return this._shape?.width() ?? 0;
-  }
-  public get calculatedHeight(): number {
-    return this._shape?.height() ?? 0;
-  }
-
   public override onDrawEvent(vector: Konva.Vector2d): void {
     if (this._shape) {
       this.width = vector.x - this._shape.x();

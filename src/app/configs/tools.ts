@@ -36,12 +36,22 @@ export const availableCanvasTools: CanvasTool[] = [
   },
   {
     name: CanvasToolType.LINE,
-    icon: 'pen_size_1',
+    icon: 'pen_size_3',
     description: 'Line tool',
     shape: OnyxShapeType.LINE,
     category: CanvasToolCategory.SHAPES,
     action: () => {
       console.log('Line tool clicked');
+    },
+  },
+  {
+    name: CanvasToolType.Drawing,
+    icon: 'draw',
+    description: 'Drawing tool',
+    shape: OnyxShapeType.DRAWING,
+    category: CanvasToolCategory.SHAPES,
+    action: () => {
+      console.log('Brush tool clicked');
     },
   }
 ]

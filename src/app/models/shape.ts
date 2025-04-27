@@ -16,6 +16,7 @@ export enum OnyxShapeType {
   LINE = 'line',
   TEXT = 'text',
   IMAGE = 'image',
+  DRAWING = 'drawing',
 }
 
 export interface OnyxRect extends OnyxBaseShape {
@@ -30,7 +31,7 @@ export interface OnyxCircle extends OnyxBaseShape {
 }
 
 export interface OnyxLine extends OnyxBaseShape {
-  type: OnyxShapeType.LINE;
+  type: OnyxShapeType.LINE | OnyxShapeType.DRAWING;
   points: number[];
 }
 

@@ -3,13 +3,13 @@ import { OnyxBaseShape, OnyxLine, OnyxShapeType } from '@app/models/shape';
 import Konva from 'konva';
 import { Vector2d } from 'konva/lib/types';
 
-export class Line extends OCShape<Konva.Line> implements OnyxLine {
+export class Drawing extends OCShape<Konva.Line> implements OnyxLine {
 
   protected _points: number[];
-  private readonly _type = OnyxShapeType.LINE;
+  private readonly _type = OnyxShapeType.DRAWING;
 
-  constructor(shape: Omit<OnyxLine, 'type'> & { type?: OnyxShapeType.LINE | OnyxShapeType.DRAWING }) {
-    if (shape.type !== undefined && shape.type !== OnyxShapeType.LINE) {
+  constructor(shape: Omit<OnyxLine, 'type'> & { type?: OnyxShapeType.DRAWING | OnyxShapeType.DRAWING }) {
+    if (shape.type !== undefined && shape.type !== OnyxShapeType.DRAWING) {
       throw new Error('Invalid shape type');
     }
     const line = new Konva.Line({
@@ -33,7 +33,7 @@ export class Line extends OCShape<Konva.Line> implements OnyxLine {
     }
   }
 
-  public override get type(): OnyxShapeType.LINE {
+  public override get type(): OnyxShapeType.DRAWING {
     return this._type;
   }
 
@@ -49,7 +49,7 @@ export class Line extends OCShape<Konva.Line> implements OnyxLine {
   public addPoint(point: Vector2d): void {
     const modifiedX = point.x - this.x;
     const modifiedY = point.y - this.y;
-    this._points = [this._points[0], this._points[1], modifiedX, modifiedY];
+    this._points.push(modifiedX, modifiedY);
     this._shape?.points(this._points);
   }
 
