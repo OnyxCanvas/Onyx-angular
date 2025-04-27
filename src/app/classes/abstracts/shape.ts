@@ -9,6 +9,7 @@ export abstract class OCShape<ShapeType extends Konva.Shape = Konva.Shape> imple
   private readonly _shapeType: OnyxShapeType;
 
   public abstract onDrawEvent(vector: Vector2d): void;
+  public abstract onDrawEnd(vector: Vector2d): void;
 
   constructor(shape: ShapeType, type: OnyxShapeType) {
     this.addDefaultProperties(shape);

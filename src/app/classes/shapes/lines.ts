@@ -33,6 +33,12 @@ export class Line extends OCShape<Konva.Line> implements OnyxLine {
     }
   }
 
+  public override onDrawEnd(vector: Konva.Vector2d): void {
+    if (this._shape) {
+      this._shape.points(this._points);
+    }
+  }
+
   public override get type(): OnyxShapeType.LINE {
     return this._type;
   }

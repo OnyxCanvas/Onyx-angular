@@ -44,6 +44,19 @@ export class Rectangle extends OCShape<Konva.Rect> implements OnyxRect {
       this.width = vector.x - this._shape.x();
       this.height = vector.y - this._shape.y();
     }
+    console.log(this.width)
+  }
+
+  public override onDrawEnd(vector: Konva.Vector2d): void {
+    if (this._shape) {
+      this.shape?.setAttrs({
+        width: Math.abs(vector.x - this._shape.x()),
+        height: Math.abs(vector.y - this._shape.y()),
+        x: Math.min(vector.x, this._shape.x()),
+        y: Math.min(vector.y, this._shape.y()),
+      });
+    }
+    console.log(this.width)
   }
 
   public static getEmptyShape(options: Partial<OnyxRect> = {}): Rectangle {

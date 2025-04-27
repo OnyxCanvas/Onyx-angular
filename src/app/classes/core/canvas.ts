@@ -146,6 +146,14 @@ export class OnyxCanvas {
     // listen for mouseup to check move end for a drawing shapes
     this._stage.on('mouseup touchend', (e) => {
       if (this._isDrawingInfo.isDrawing) {
+        const pos = this._stage.getPointerPosition();
+        if (pos) {
+          const shape = this._isDrawingInfo.shape;
+          if (shape) {
+            shape.onDrawEnd(pos);
+            this.redraw();
+          }
+        }
         this._isDrawingInfo = { isDrawing: false, shape: undefined };
       }
     });
