@@ -1,7 +1,6 @@
 import { OCShape } from '@app/classes/abstracts/shape';
 import { OnyxRect, OnyxShapeType } from '@app/models/shape';
 import Konva from 'konva';
-import { v4 as uuid } from 'uuid';
 
 export class Rectangle extends OCShape<Konva.Rect> implements OnyxRect {
 
@@ -57,21 +56,6 @@ export class Rectangle extends OCShape<Konva.Rect> implements OnyxRect {
       });
     }
     console.log(this.width)
-  }
-
-  public static getEmptyShape(options: Partial<OnyxRect> = {}): Rectangle {
-    return new Rectangle({
-      x: 0,
-      y: 0,
-      width: 0,
-      height: 0,
-      fill: 'transparent',
-      stroke: 'black',
-      strokeWidth: 1,
-      opacity: 1,
-      id: uuid(),
-      ...options
-    });
   }
 
 }
