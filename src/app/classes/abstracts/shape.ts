@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid';
 
 export abstract class OCShape<ShapeType extends Konva.Shape = Konva.Shape> implements OnyxBaseShape {
 
-  protected _shape: ShapeType | null = null;
+  private _shape: ShapeType | null = null;
   private readonly _shapeType: OnyxShapeType;
 
   public abstract onDrawEvent(vector: Vector2d): void;

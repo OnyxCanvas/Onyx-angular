@@ -27,33 +27,33 @@ export class Rectangle extends OCShape<Konva.Rect> implements OnyxRect {
     return this._type;
   }
   public get width(): number {
-    return this._shape?.width()!
+    return this.shape?.width()!
   }
   public set width(value: number) {
-    this._shape?.width(value);
+    this.shape?.width(value);
   }
   public get height(): number {
-    return this._shape?.height()!
+    return this.shape?.height()!
   }
   public set height(value: number) {
-    this._shape?.height(value);
+    this.shape?.height(value);
   }
 
   public override onDrawEvent(vector: Konva.Vector2d): void {
-    if (this._shape) {
-      this.width = vector.x - this._shape.x();
-      this.height = vector.y - this._shape.y();
+    if (this.shape) {
+      this.width = vector.x - this.shape.x();
+      this.height = vector.y - this.shape.y();
     }
     console.log(this.width)
   }
 
   public override onDrawEnd(vector: Konva.Vector2d): void {
-    if (this._shape) {
+    if (this.shape) {
       this.shape?.setAttrs({
-        width: Math.abs(vector.x - this._shape.x()),
-        height: Math.abs(vector.y - this._shape.y()),
-        x: Math.min(vector.x, this._shape.x()),
-        y: Math.min(vector.y, this._shape.y()),
+        width: Math.abs(vector.x - this.shape.x()),
+        height: Math.abs(vector.y - this.shape.y()),
+        x: Math.min(vector.x, this.shape.x()),
+        y: Math.min(vector.y, this.shape.y()),
       });
     }
     console.log(this.width)
